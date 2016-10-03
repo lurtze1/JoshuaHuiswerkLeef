@@ -46,7 +46,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Drawing.cs" />
     <Compile Include="drawRectangle.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

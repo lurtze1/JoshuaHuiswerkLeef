@@ -1,4 +1,6 @@
-﻿namespace CoolTekenDing
+﻿using System.Drawing;
+
+namespace CoolTekenDing
 {
     public class LegacyRectangleAdapter : Shape
     {
@@ -7,7 +9,7 @@
         {
             rect = new LegacyRectangle();
         }
-        public object draw(int x, int y, int height, int width)
+        public Rectangle draw(int x, int y, int height, int width)
         {
             return rect.drawRectangle(x - (width / 2), y - (height / 2), height, width);
         }

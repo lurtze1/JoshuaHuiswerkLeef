@@ -7,9 +7,9 @@ namespace CoolTekenDing
 {
     public partial class Form1 : Form
     {
-        List<object> shapes = new List<object>();
-        LegacyRectangle legacyMethod;
-        Shape DrawingMethod;
+        private readonly List<Rectangle> shapes = new List<Rectangle>();
+        private Shape DrawingMethod;
+        private LegacyRectangle legacyMethod;
 
         public Form1()
         {
@@ -18,7 +18,7 @@ namespace CoolTekenDing
 
         private void OldCubeRbutton_CheckedChanged(object sender, EventArgs e)
         {
-            if (OldCubeRbutton.Checked == true)
+            if (OldCubeRbutton.Checked)
             {
                 if (adapterTrackBar.Value == 0)
                 {
@@ -33,7 +33,7 @@ namespace CoolTekenDing
 
         private void CubeRbutton_CheckedChanged(object sender, EventArgs e)
         {
-            if (CubeRbutton.Checked == true)
+            if (CubeRbutton.Checked)
             {
                 DrawingMethod = new drawRectangle();
             }
@@ -41,24 +41,27 @@ namespace CoolTekenDing
 
         private void panel1_MouseClick(object sender, MouseEventArgs e)
         {
-            object shape;
-            if (adapterTrackBar.Value == 1 && OldCubeRbutton.Checked)
+            Rectangle shape;
+            if ((adapterTrackBar.Value == 1) && OldCubeRbutton.Checked)
             {
-                shape = legacyMethod.drawRectangle(e.X, e.Y, Convert.ToInt32(widthSelector.Value), Convert.ToInt32(heightSelector.Value));
+                shape = legacyMethod.drawRectangle(e.X, e.Y, Convert.ToInt32(widthSelector.Value),
+                    Convert.ToInt32(heightSelector.Value));
             }
             else
             {
-                shape = DrawingMethod.draw(e.X, e.Y, Convert.ToInt32(widthSelector.Value), Convert.ToInt32(heightSelector.Value));
+                shape = DrawingMethod.draw(e.X, e.Y, Convert.ToInt32(widthSelector.Value),
+                    Convert.ToInt32(heightSelector.Value));
             }
             shapes.Add(shape);
 
             panel1.Refresh();
         }
+
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
-            SolidBrush brush = new SolidBrush(Color.Black);
+            var brush = new SolidBrush(Color.Black);
 
-            foreach (Rectangle shape in shapes)
+            foreach (var shape in shapes)
             {
                 e.Graphics.FillRectangle(brush, shape);
             }
